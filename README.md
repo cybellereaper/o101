@@ -13,4 +13,5 @@
 This project is for educational use only. Not affiliated with KingsIsle or Wizard101.
 
 ## License
-MIT
+BSD 3-Clause
+
