@@ -1,4 +1,4 @@
-# WizTurtle
+# O101
 
 WizTurtle is a Go rewrite of the deprecated **o101** tooling. It focuses on
 providing a modern, well-tested patching workflow for managing Wizard101-style
@@ -14,7 +14,7 @@ emulation server in a single toolkit.
   validation to prevent corrupt deployments.
 - **Crash-safe state** – atomic persistence of patch state with automatic
   recovery from partial or corrupted files.
-- **CLI first** – the `wizturtle` patcher, `wizserver` realm emulator, and
+- **CLI first** – the `O101` patcher, `wizserver` realm emulator, and
   `messagesorter` capture analyser deliver streamlined tooling for patching,
   gameplay prototyping, and protocol reverse engineering.
 - **WAD + serializer primitives** – production-ready byte buffers, WAD archive
@@ -26,7 +26,7 @@ emulation server in a single toolkit.
 ## Installation
 
 ```bash
-go install github.com/cybellereaper/wizturtle/v2/cmd/wizturtle@latest
+go install github.com/cybellereaper/open101/cmd/O101@latest
 ```
 
 ## Usage
