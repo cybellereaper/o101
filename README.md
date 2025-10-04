@@ -1,6 +1,6 @@
 # O101
 
-WizTurtle is a Go rewrite of the deprecated **o101** tooling. It focuses on
+O101 is a Go rewrite of the deprecated **o101** tooling. It focuses on
 providing a modern, well-tested patching workflow for managing Wizard101-style
 content deployments. The project combines a concurrent patcher, strict manifest
 validation, durable state tracking, and an experimental multiplayer realm
