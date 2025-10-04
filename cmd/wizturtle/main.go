@@ -11,8 +11,8 @@ import (
 	"path/filepath"
 	"time"
 
-	"github.com/cybellereaper/wizturtle/v2/internal/patcher"
-	"github.com/cybellereaper/wizturtle/v2/internal/state"
+	"github.com/cybellereaper/open101/internal/patcher"
+	"github.com/cybellereaper/open101/internal/state"
 )
 
 func main() {

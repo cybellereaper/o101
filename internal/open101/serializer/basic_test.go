@@ -3,7 +3,7 @@ package serializer
 import (
 	"testing"
 
-	bufferio "github.com/cybellereaper/wizturtle/v2/internal/open101/io"
+	bufferio "github.com/cybellereaper/open101/internal/open101/io"
 )
 
 func TestBasicBinarySerializerRoundTrip(t *testing.T) {

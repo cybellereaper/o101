@@ -15,7 +15,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/cybellereaper/wizturtle/v2/internal/state"
+	"github.com/cybellereaper/open101/internal/state"
 )
 
 type memoryLogger struct {

@@ -20,8 +20,8 @@ import (
 
 	"golang.org/x/sync/errgroup"
 
-	"github.com/cybellereaper/wizturtle/v2/internal/manifest"
-	"github.com/cybellereaper/wizturtle/v2/internal/state"
+	"github.com/cybellereaper/open101/internal/manifest"
+	"github.com/cybellereaper/open101/internal/state"
 )
 
 // ErrUpToDate is returned when no files need to be patched.

@@ -16,7 +16,7 @@ import (
 	"syscall"
 	"time"
 
-	"github.com/cybellereaper/wizturtle/v2/internal/wizserver"
+	"github.com/cybellereaper/open101/internal/wizserver"
 )
 
 func main() {

@@ -7,7 +7,7 @@ import (
 	"os"
 	"path/filepath"
 
-	"github.com/cybellereaper/wizturtle/v2/internal/messagesorter"
+	"github.com/cybellereaper/open101/internal/messagesorter"
 )
 
 func main() {

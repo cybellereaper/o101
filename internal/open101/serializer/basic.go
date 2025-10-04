@@ -1,7 +1,7 @@
 package serializer
 
 import (
-	bufferio "github.com/cybellereaper/wizturtle/v2/internal/open101/io"
+	bufferio "github.com/cybellereaper/open101/internal/open101/io"
 )
 
 // The BasicBinarySerializer mirrors the helper surface in the reference implementation while leveraging

@@ -1,4 +1,4 @@
-module github.com/cybellereaper/wizturtle/v2
+module github.com/cybellereaper/open101
 
 go 1.22
 
