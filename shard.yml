@@ -1,0 +1,15 @@
+name: o101
+version: 0.1.0
+crystal: ">= 1.9.0"
+license: BSD-3-Clause
+
+authors:
+  - o101 contributors
+
+targets:
+  wizturtle:
+    main: src/bin/wizturtle.cr
+  wizserver:
+    main: src/bin/wizserver.cr
+  messagesorter:
+    main: src/bin/messagesorter.cr
