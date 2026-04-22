@@ -1,0 +1,17 @@
+name: open101
+version: 0.1.0
+
+authors:
+  - open101 contributors
+
+targets:
+  wizturtle:
+    main: src/cli/wizturtle.cr
+  wizserver:
+    main: src/cli/wizserver.cr
+  messagesorter:
+    main: src/cli/messagesorter.cr
+
+crystal: '>= 1.10.0'
+
+license: BSD-3-Clause
