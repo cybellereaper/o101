@@ -127,4 +127,4 @@ go test ./...
 
 ## License
 
-BSD 3-Clause
+GNU General Public License v3.0
