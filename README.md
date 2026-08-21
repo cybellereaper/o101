@@ -1,36 +1,30 @@
 # O101
 
-O101 is a Go rewrite of the deprecated **o101** tooling. It focuses on
-providing a modern, well-tested patching workflow for managing Wizard101-style
-content deployments. The project combines a concurrent patcher, strict manifest
-validation, durable state tracking, and an experimental multiplayer realm
-emulation server in a single toolkit.
+O101 is a Rust implementation of the deprecated **o101** tooling. It provides a tested patching workflow for Wizard101-style content deployments together with protocol utilities, WAD archive support, message capture sorting, and an experimental multiplayer realm emulator.
 
 ## Features
 
-- **Concurrent patching** – downloads and validates files in parallel with
-  bounded concurrency.
-- **Deterministic manifests** – JSON manifest format with strict schema
-  validation to prevent corrupt deployments.
-- **Crash-safe state** – atomic persistence of patch state with automatic
-  recovery from partial or corrupted files.
-- **CLI first** – the `wizturtle` patcher, `wizserver` realm emulator, and
-  `messagesorter` capture analyser deliver streamlined tooling for patching,
-  gameplay prototyping, and protocol reverse engineering.
-- **WAD + serializer primitives** – production-ready byte buffers, WAD archive
-  readers, and serializer helpers compatible with the Open101 reference
-  formats.
-- **Comprehensive tests** – aggressive unit tests cover manifest parsing,
-  state persistence, in-memory realm behaviour, and end-to-end patch execution.
+- **Concurrent patching** — bounded parallel downloads with size and SHA-256 validation.
+- **Strict manifests** — validated JSON manifests with traversal-safe install paths.
+- **Crash-resistant state** — deterministic JSON state persisted through temporary-file replacement.
+- **Three CLI tools** — `wizturtle`, `wizserver`, and `messagesorter`.
+- **Open101 primitives** — little-endian/bit-packed byte buffers, WAD readers, CRC validation, zlib support, and serializer helpers.
+- **Realm model** — concurrency-safe zones, character caching, broadcast handling, and serialization helpers.
+- **Rust tests and CI** — formatting, Clippy, unit/integration behavior, and binary builds are verified in GitHub Actions.
+
+## Requirements
+
+- Rust 1.88 or newer.
 
 ## Installation
 
 ```bash
-go install github.com/cybellereaper/open101/cmd/wizturtle@latest
-go install github.com/cybellereaper/open101/cmd/wizserver@latest
+cargo install --git https://github.com/cybellereaper/o101 --bin wizturtle
+cargo install --git https://github.com/cybellereaper/o101 --bin wizserver
+cargo install --git https://github.com/cybellereaper/o101 --bin messagesorter
 ```
 
-## Usage
+## Patcher
 
 ```bash
 wizturtle \
@@ -49,7 +43,7 @@ The patch info endpoint is expected to respond with JSON similar to:
 }
 ```
 
-The referenced manifest contains an array of files to install:
+The referenced manifest contains the files to install:
 
 ```json
 {
@@ -66,12 +60,7 @@ The referenced manifest contains an array of files to install:
 }
 ```
 
-### Realm Emulator
-
-The `wizserver` command provides a lightweight TCP server that emulates the
-login and game sockets exposed by the original C# reference implementation. It
-bootstraps a fully in-memory realm with zone assignment and character caching
-logic.
+## Realm emulator
 
 ```bash
 wizserver \
@@ -83,46 +72,28 @@ wizserver \
   --zone-capacity 10
 ```
 
-New TCP connections receive an informational greeting and are echoed back the
-first line of data they send, mirroring the handshake used for integration
-tests. The realm package exposes reusable building blocks (`Realm`, `Zone`,
-`InGameCharacter`) for embedding in more advanced prototypes.
+The TCP services send an informational greeting and echo the first payload received. The `o101::wizserver` module exposes reusable `Realm`, `Zone`, `InGameCharacter`, and serialization helpers for protocol experiments.
 
-### Open101 IO & Serialization
+## Open101 IO and serialization
 
-The `internal/open101/io` package provides a bit-level `ByteBuffer`, a
-production-quality WAD archive parser, and a concurrency-safe resource manager
-that mirrors the behaviour of the legacy C# tooling. The accompanying
-`internal/open101/serializer` package exposes ergonomic helpers (`ByteString`,
-`GID`, and the `BasicBinarySerializer`) for encoding and decoding Wizard101
-network payloads.
+`o101::open101::bytebuffer` provides little-endian scalar encoding and the original Open101 bit-packing behavior. `o101::open101::wad` parses KIWAD archives, validates CRC32, handles compressed entries, and caches WADs through `Manager`. `o101::open101::serializer` provides `ByteString`, `Gid`, and strongly typed serializer helpers.
 
-Aggressive unit tests validate bit packing edge cases, compressed and
-uncompressed WAD entries, resource manager caching, and round-trip serialization
-of primitive and identifier types.
-
-### Message Capture Sorting
-
-The `messagesorter` command mirrors the legacy MessageSorter utility. It reads a
-captured protocol transcript, extracts the service metadata, strips record
-blocks, deduplicates protocol messages, and writes an alphabetised listing with
-line numbers.
+## Message capture sorting
 
 ```bash
 messagesorter /path/to/MessageSorter/Traffic/ServiceCapture.xml
 # wrote 56 messages for service LoginService (42) to ./42_LoginService.txt
 ```
 
-The output filename follows the `<ServiceID>_<ServiceName>.txt` convention and
-defaults to the same directory as the input capture unless `--out` is
-specified.
+Use `--out <directory>` to select another output directory. Output follows the `<ServiceID>_<ServiceName>.txt` naming convention.
 
 ## Development
 
-Run the full test suite:
-
 ```bash
-go test ./...
+cargo fmt --all -- --check
+cargo clippy --all-targets --all-features -- -D warnings
+cargo test --all-targets
+cargo build --release --bins
 ```
 
 ## License
