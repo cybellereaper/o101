@@ -1,3 +1,5 @@
+extern crate self as o101;
+
 pub mod manifest;
 pub mod messagesorter;
 pub mod open101;
