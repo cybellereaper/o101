@@ -1,10 +1,10 @@
 [package]
-name = "o101"
+name = "openarcadia"
 version = "0.1.0"
 edition = "2024"
 rust-version = "1.88"
 license = "GPL-3.0-only"
-description = "Wizard101 patching, protocol, WAD, and realm tooling"
+description = "Open infrastructure toolkit for content deployment, protocol analysis, WAD archives, and realm simulation"
 repository = "https://github.com/cybellereaper/o101"
 
 [dependencies]
