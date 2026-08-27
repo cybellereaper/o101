@@ -5,7 +5,7 @@ edition = "2024"
 rust-version = "1.88"
 license = "GPL-3.0-only"
 description = "Wizard101 patching, protocol, WAD, and realm tooling"
-repository = "https://github.com/cybellereaper/o101"
+repository = "https://github.com/aliceblackrose/o101"
 
 [dependencies]
 crc32fast = "1"
